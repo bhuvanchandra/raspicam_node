@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
-if(${CMAKE_SYSTEM_PROCESSOR} MATCHES arm*) 
+if(${CMAKE_SYSTEM_PROCESSOR} MATCHES arm*)
   FIND_LIBRARY(mmal_LIBS NAMES mmal PATHS /opt/vc/lib)
   FIND_LIBRARY(mmalcore_LIBS NAMES mmal_core PATHS /opt/vc/lib)
   FIND_LIBRARY(mmalutil_LIBS NAMES mmal_util PATHS /opt/vc/lib)
@@ -39,14 +39,14 @@ if(${CMAKE_SYSTEM_PROCESSOR} MATCHES arm*)
       MESSAGE(FATAL_ERROR "Could not find vchostif library")
   ENDIF()
 
-  set(RPI_LIBRARIES ${RPI_LIBRARIES} 
+  set(RPI_LIBRARIES ${RPI_LIBRARIES}
   ${bcmhost_LIBS}
-  ${vcos_LIBS} 
-  ${mmal_LIBS} 
-  ${mmalcore_LIBS} 
-  ${mmalutil_LIBS}  
-  ${mmalvcclient_LIBS} 
-  ${vchostif_LIBS} 
+  ${vcos_LIBS}
+  ${mmal_LIBS}
+  ${mmalcore_LIBS}
+  ${mmalutil_LIBS}
+  ${mmalvcclient_LIBS}
+  ${vchostif_LIBS}
   )
 ENDIF()
 
@@ -109,7 +109,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(include
   ${catkin_INCLUDE_DIRS}
-  /home/pi/userland
+  /userland
   /opt/vc/include
   /opt/vc/include/interface/vcos/pthreads
   /opt/vc/include/interface/vmcs_host/linux
@@ -117,11 +117,11 @@ include_directories(include
 
 ## Declare a cpp library
 add_library(raspicli STATIC
-  src/RaspiCLI.cpp 
+  src/RaspiCLI.cpp
 )
 
 add_library(raspicamcontrol STATIC
-  src/RaspiCamControl.cpp 
+  src/RaspiCamControl.cpp
 )
 
 ## Declare a cpp executable
@@ -136,7 +136,7 @@ add_dependencies(raspicam_node raspicam_node_gencfg)
 target_link_libraries(raspicam_node
   ${catkin_LIBRARIES}
   raspicamcontrol raspicli
-  ${RPI_LIBRARIES} 
+  ${RPI_LIBRARIES}
 )
 
 #############
